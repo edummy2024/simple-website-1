@@ -1,6 +1,6 @@
 export default function About() {
   return (
-    <div className="grid grid-cols-2 gap-10">
+    <div className="grid md:grid-cols-2 gap-10">
       <div>
         <img
           src="https://images.squarespace-cdn.com/content/v1/5d5e6a57e7a27b0001395f6e/1572256947996-P1OBBDUDXL94R021X61I/IMG_7460_BW.jpg?format=1000w"
