@@ -4,15 +4,19 @@ export async function loader() {
   const data = await fetch('https://dummyjson.com/products?limit=16&select=title,thumbnail,images')
   const res = await data.json();
   const products = res.products;
+
+  // throw new Response(null, { status: 404, statusText: 'Ok'});
+  
   return products;
 }
 
 
-export default function Index() {
+export function Index() {
   const products = useLoaderData();
+  
   return (
     <>
-      <article className="grid xl:grid-cols-2 gap-10 relative">
+      <article className="grid xl:grid-cols-2 gap-10 items-center relative">
         {
           Array.isArray(products) && products.map((product) => (
             <Link to={`${product.id}`}>
