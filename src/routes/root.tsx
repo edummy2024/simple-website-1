@@ -1,5 +1,16 @@
 import { useState } from "react";
-import { Link, NavLink, Outlet, useNavigation } from "react-router-dom";
+import { Link, NavLink, Outlet, redirect, useNavigate, useNavigation } from "react-router-dom";
+import { get } from "../utils/auth";
+
+
+export async function loader() {
+  const auth = get('auth');
+  if (auth.length == 0 || !auth) {
+    return redirect('/signin');
+  }
+
+  return null;
+}
 
 export default function Root() {
   const navigation = useNavigation();
@@ -24,6 +35,9 @@ export default function Root() {
                 isPending ? 'opacity-5' : isActive ? "bg-yellow-200 p-3" : "p-3"
               }>About</NavLink>
             </li>
+            <li>
+              <Link to={'logout'}>Log out</Link>
+            </li>
           </ul>
 
           <i className={`bx ${!isMenuOpen ? 'bx-menu' : 'bx-x'} xl:hidden block text-5xl cursor-pointer`} onClick={() => setIsMenuOpen(!isMenuOpen)}></i>
@@ -37,6 +51,10 @@ export default function Root() {
             <NavLink to={'about'} className={({ isActive, isPending }) =>
               isPending ? 'opacity-5' : isActive ? "bg-yellow-200 p-3 w-full" : "p-3 w-full"
             }>About</NavLink>
+
+            <Link to={'logout'} className={"active:bg-yellow-200 p-3 w-full"
+            }>logout</Link>
+
           </div>
         </nav>
       </header>
