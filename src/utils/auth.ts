@@ -7,7 +7,7 @@ export async function signin({
 }) {
   const users: any[] = get('users');
 
-  const check = users.find(user => user.username?.toLowerCase() === username.toLowerCase());
+  const check = users.find(user => user.username === username && user.password === password);
 
   if (!check) {
     return {
